@@ -71,6 +71,7 @@ class KuJuDriveSpawner(KubeSpawner):
         except HTTPClientError as e:
             self.log.warning("Failed to obtain drive token for user {username}.\n" +
                              "Exception: {e}".format(username=self.user.name, e=e))
+            e.message = 'Your Drive is not initialized yet, please visit {drive_url} to enable your drive account'.format(drive_url=self.drive_url)
             raise
         return resp.body.decode('utf-8')
 
